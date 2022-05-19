@@ -1,0 +1,8 @@
+<div #Fullscreen class="body">
+    <com-header></com-header>
+    <div class="main" [ngClass]="{'mt-60': CF.fixedHeader}">
+        <div class="my__overlay" *ngIf="CF.showMenu" (click)="closeMenu()"></div>
+        <router-outlet></router-outlet>
+    </div>
+    <com-footer></com-footer>
+</div>

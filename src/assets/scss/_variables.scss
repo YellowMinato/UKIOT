@@ -1,0 +1,62 @@
+// COLORS
+ 
+
+$theme-color-dark: #612a76;
+$theme-color: #7e3f97;
+$theme-color-light: #9b4fba;
+$theme-alt-color: #9b4fba;
+$text-white: #fff;
+$color-light-red: orange;
+//-------------------- Responsive sizes -------------------- //
+$large-device-width: 1199px; // Large devices (desktops, less than 1200px)
+$medium-device-width: 991px; // Medium devices (tablets, less than 992px)
+$small-device-width: 767px; // Small devices (landscape phones, less than 768px)
+$extra-small-device-width: 575px; // Extra small devices (portrait phones, less than 576px)
+//-------------------- Responsive --------------------//
+@mixin desktop {
+    @media (max-width: #{$large-device-width}) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (max-width: #{$medium-device-width}) {
+        @content;
+    }
+}
+@mixin mobile {
+    @media (max-width: #{$small-device-width}) {
+        @content;
+    }
+}
+@mixin extra-small-mobile {
+    @media (max-width: #{$extra-small-device-width}) {
+        @content;
+    }
+}
+//USER SELECT
+@mixin UserSelect($property) {
+    -webkit-user-select: $property;
+    -moz-user-select: $property;
+    -ms-user-select: $property;
+    user-select: $property;
+}
+// PLACEHOLDER
+@mixin optional-at-root($sel) {
+    @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+        @content;
+    }
+}
+@mixin placeholder {
+    @include optional-at-root("::-webkit-input-placeholder") {
+        @content;
+    }
+    @include optional-at-root(":-moz-placeholder") {
+        @content;
+    }
+    @include optional-at-root("::-moz-placeholder") {
+        @content;
+    }
+    @include optional-at-root(":-ms-input-placeholder") {
+        @content;
+    }
+}

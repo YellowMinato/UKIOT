@@ -1,0 +1,18 @@
+@import "./../../../assets/scss/variables";
+footer#desktop {
+    padding: 5px 0;
+    background-color: $theme-color;
+    color: #fff;
+    p.text {
+        font-size: 15px;
+        a {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+    h6 {
+      position: absolute;
+      right: 30px;
+    }
+} 

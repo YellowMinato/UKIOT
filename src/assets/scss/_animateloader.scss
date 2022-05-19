@@ -1,0 +1,23 @@
+.animated-background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeholder;
+    animation-timing-function: linear;
+    background: #eee;
+    background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+    background-size: 1200px 100px;
+    min-height: 25px;
+    width: 100%;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+@keyframes placeholder {
+    0% {
+        background-position: -600px 0;
+    }
+    100% {
+        background-position: 600px 0;
+    }
+}

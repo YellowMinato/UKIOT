@@ -1,0 +1,42 @@
+@import "./../../../assets/scss/variables";
+@import "./../../../assets/scss/animateloader";
+#dashboard {
+    margin-bottom: 20px;
+    .btn-circle {
+        padding: 10px 15px;
+        border-radius: 50%;
+    }
+    .card-group {
+        .card {
+            .card-body {
+                b {
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+                h2 {
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: capitalize;
+        @include mobile {
+            font-size: 18px;
+            line-height: 28px;
+        }
+        small {
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+    h6 {
+        font-size: 16px;
+        font-weight: 400;
+        @include mobile {
+            font-size: 14px;
+        }
+    }
+}

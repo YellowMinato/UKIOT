@@ -1,0 +1,42 @@
+html, body, h1, h2, h3, h4, p, img {font-family:  monospace; margin: 0;} /* margin reset*/
+@page  
+{ 
+    size: auto;
+    margin: 15px 12px 15px 25px  !important;   
+} 
+ 
+
+table,
+th,
+td {
+  font-family:  monospace;
+  padding: 3px;
+  text-align: left;
+  border-collapse: collapse;
+  border: 1px solid #a5a5a5;
+}
+table {
+  table-layout: fixed;
+  width: calc(100% - 5px); 
+  -webkit-print-color-adjust:exact ; 
+}
+th,
+td {
+  font-size: 14px; 
+}
+th:nth-child(1),
+td:nth-child(1) {
+  width: 90px;
+}
+th:nth-child(2),
+td:nth-child(2) {
+  width: 65px;
+}
+th:nth-child(3),
+td:nth-child(3) {
+  width: 85px;
+}
+th:nth-child(4),
+td:nth-child(4) {
+  width: 70px;
+}

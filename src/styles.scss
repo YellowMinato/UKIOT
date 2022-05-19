@@ -1,0 +1,403 @@
+@import "./assets/scss/variables";
+$font-family-sans-serif: "Montserrat", sans-serif;
+$primary: $theme-color;
+@import "~bootstrap/scss/bootstrap";
+@import "./assets/scss/icons/themify-icons/themify-icons.css";
+* {
+  user-select: none;
+  outline: none !important;
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #a9a9a9;
+    outline: #708090 solid 1px;
+  }
+}
+
+.overflowx {
+  overflow-x: hidden !important;
+}
+.theme-color {
+  color: $theme-color;
+}
+.cursor {
+  cursor: pointer;
+}
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #f3ecf6 !important;
+  cursor: not-allowed;
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1340px;
+  }
+}
+// LOADER
+.loader {
+  $size: 150px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 999999;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  div {
+    padding: 0.5rem;
+    animation: bounce 0.8s infinite alternate;
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+    .Favicon {
+      opacity: 1;
+      &::before {
+        content: "";
+        background-image: url("./assets/images/svg/logo.svg");
+        filter: drop-shadow(0px 10px 6px rgba(0, 0, 0, 0.2));
+        width: $size/2;
+        height: $size/2;
+        display: block;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
+@keyframes bounce {
+  to {
+    opacity: 0.3;
+    transform: translate3d(0, -1rem, 0);
+  }
+}
+.button--loading {
+  position: relative;
+  cursor: wait;
+  pointer-events: none;
+  outline: 0;
+  :before {
+    content: "";
+    margin: -13px 0 0 -13px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-border-radius: 24px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 24px;
+    -moz-background-clip: padding;
+    border-radius: 24px;
+    background-clip: padding-box;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-top-color: $theme-color;
+    animation: animation-rotate 750ms linear infinite;
+  }
+}
+.button--loading span,
+.button--loading:active span,
+.button--loading:hover span {
+  color: transparent;
+  text-shadow: none;
+}
+@keyframes animation-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+// TABLES
+.responsiveTable {
+  // .dataTables_scroll {
+  //   box-shadow: 0 2px 4px 0 rgba(55, 67, 82, 0.2);
+  // }
+  ._title {
+    position: absolute;
+    left: 10px;
+    top: 25px;
+  }
+  .paginate_button {
+    font-size: 14px !important;
+    border-radius: 2px !important;
+    padding: 0px 10px !important;
+    &.disabled {
+      opacity: 0;
+      display: none;
+    }
+    &:hover,
+    &.current {
+      border-radius: 0 !important;
+      border: none !important;
+      border-bottom: 1px solid $theme-color !important;
+    }
+    &:hover {
+      background: linear-gradient(
+        to bottom,
+        #dcdcdc 0%,
+        #dcdcdc 100%
+      ) !important;
+    }
+  }
+  .previous,
+  .next {
+    border-radius: 0 !important;
+  }
+  .buttons-copy,
+  .buttons-excel,
+  .buttons-print {
+    border: 1px solid #fff !important;
+    background-image: none !important;
+    color: #fff;
+    transition: 150ms linear;
+  }
+  .buttons-copy {
+    &:hover {
+      opacity: 0.8;
+      background-color: #03a9f4 !important;
+    }
+    background-color: #03a9f4;
+  }
+  .buttons-excel {
+    &:hover,
+    &:active,
+    &:focus {
+      opacity: 0.75;
+      background-color: #008000 !important;
+    }
+    background-color: #008000;
+  }
+  .buttons-print {
+    &:hover {
+      opacity: 0.8;
+      background-color: #ff5722 !important;
+    }
+    background-color: #ff5722;
+  }
+  .dataTables_scrollBody {
+    border: none !important;
+  }
+  input[type="search"] {
+    border: 1px solid#ccc;
+    border-radius: 2px;
+    height: 34px;
+  }
+  .buttons-csv {
+    display: none !important;
+  }
+  div.dt-buttons {
+    float: right;
+    padding-left: 10px;
+  }
+  table.dataTable thead .sorting_asc,
+  table.dataTable thead .sorting_desc {
+    background-image: none;
+  }
+  .dataTables_wrapper .dataTables_filter {
+    padding-right: 10px;
+  }
+  .dataTables_info {
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: $theme-color;
+  }
+  table.dataTable thead th {
+    padding: 5px 18px;
+    border-bottom: 1px solid $theme-color;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  thead th {
+    background: $theme-color;
+    color: #fff;
+  }
+  table {
+    width: 100% !important;
+    tr {
+      // background-color: #f8f8f8;
+      background-color: #fff;
+      border: none;
+      // &:nth-of-type(odd) {
+      //   background-color: rgba(0, 0, 0, 0.05);
+      // }
+    }
+    th,
+    td {
+      position: relative;
+      font-size: 15px;
+      border: 1px solid #dee2e6;
+      border-top: none;
+      border-right: none;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:nth-child(1) {
+        border-left: none;
+      }
+      &:nth-last-child(1) {
+        border-right: none;
+      }
+      &.nop {
+        padding: 0 !important;
+      }
+      input {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        padding: 0 0 0 5px;
+      }
+      .uos {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 11px;
+        color: #828282;
+        z-index: 0;
+        user-select: none;
+        pointer-events: none;
+        font-weight: 500;
+      }
+    }
+  }
+}
+.disabledType {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+// TABLES
+.swal2-title {
+  font-size: 24px !important;
+  font-weight: 500 !important;
+}
+.swal2-styled {
+  width: 150px;
+  box-shadow: none !important;
+}
+.swal2-styled.swal2-confirm {
+  background-color: $theme-color !important;
+}
+
+.cuppa-dropdown {
+  opacity: 1;
+  .single-select-mode .pure-checkbox input[type="checkbox"] + label {
+    display: none;
+  }
+  .selected-list {
+    display: none;
+  }
+  .list-filter .c-search {
+    top: 5px !important;
+  }
+  .list-area {
+    box-shadow: none !important;
+  }
+  .arrow-down,
+  .arrow-up {
+    display: none !important;
+  }
+  .lazyContainer {
+    label {
+      margin-bottom: 0;
+      &.outofstock {
+        color: red;
+        pointer-events: none;
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// ----------------------angular 2 multi-dropdown-------------------------------
+.my_dropdown .pure-checkbox input[type="checkbox"] + label:before {
+  border-width: 1px !important;
+}
+.my_dropdown .dropdown-list ul li {
+  border-top: 1px solid #ccc !important;
+}
+.my_dropdown .dropdown-list ul li label {
+  cursor: pointer;
+  margin-bottom: 0 !important;
+}
+.multiselect-dropdown .dropdown-btn .selected-item {
+  border: 0px !important;
+  margin-right: 4px;
+  background: #ffffff !important;
+  padding: 0 5px;
+  color: #000 !important;
+  border-radius: 2px;
+  float: left;
+  padding-right: 18px !important;
+  max-width: 100% !important;
+  a {
+    display: none !important;
+  }
+  }
+
+//   .multiselect-dropdown .dropdown-list ul li .multiselect-item-checkbox {
+//     -webkit-animation: 0.2s ease-in borderscale;
+//     animation: 0.2s ease-in borderscale;
+//     background: #7e3f97;
+
+//     .multiselect-item-checkbox input[type="checkbox"] + div:before {
+//       box-sizing: content-box;
+//       content: "";
+//       color: #7e3f97;
+//       position: absolute;
+//       top: 50%;
+//       left: 0;
+//       width: 14px;
+//       height: 14px;
+//       margin-top: -9px;
+//       border: 2px solid #7e3f97;
+//       text-align: center;
+//       transition: 0.4s;
+//     }
+//     .multiselect-item-checkbox input[type="checkbox"] + div:after {
+//       box-sizing: content-box;
+//       content: "";
+//       position: absolute;
+//       transform: scale(0);
+//       transform-origin: 50%;
+//       transition: transform 0.2s ease-out;
+//       background-color: transparent;
+//       top: 50%;
+//       left: 4px;
+//       width: 8px;
+//       height: 3px;
+//       margin-top: -4px;
+//       border-style: solid;
+//       border-color: #fff;
+//       border-width: 0 0 3px 3px;
+//       -o-border-image: none;
+//       border-image: none;
+//       transform: rotate(-45deg) scale(0);
+//     }
+// }
+
+// ----------------------angular 2 multi-dropdown-------------------------------
+
+.invalid {
+  color: orangered;
+  font-size: 13px;
+  margin-left: 5px;
+}
+label.required::after {
+  content: " *";
+  color: red;
+}

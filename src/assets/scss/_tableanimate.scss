@@ -1,0 +1,132 @@
+
+
+$grey: rgb(55, 67, 82);
+$blue: #9b4fba;
+$white: rgb(255, 255, 255);
+$header-color: #7e3f97;
+$even-color:  #f8f9fb;
+
+@mixin line($color) {
+  background-color: $color;
+  position: relative;
+  overflow: hidden;
+  will-change: auto;
+  pointer-events: none;
+  opacity: 0.1;
+  animation: shimmer 1.8s cubic-bezier(0.45, 0.07, 0.49, 0.93) infinite;
+
+  @for $i from 2 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 100}ms;
+    }
+  }
+}
+
+ 
+
+html, body {
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-loader {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  border-radius: 3px;
+ // box-shadow: 0 2px 4px 0 rgba(55, 67, 82, 0.2);
+  position: relative;
+
+  &--no-animate {
+
+    .table-loader__row .line {
+      animation: none !important;
+    }
+  }
+
+  &__header {
+    background-color: $header-color;
+    &.table-loader__row {
+
+      .line,
+      .line:first-child {
+        @include line($white);
+      }
+    }
+  }
+  &__footer {
+    background-color: $even-color;
+    &.table-loader__row {
+
+      .line,
+      .line:first-child {
+        @include line($white);
+      }
+    }
+  }
+
+  &__row {
+    height: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 32px;
+    align-items: center;
+    padding: 0 24px;
+
+    &:nth-child(even) {
+      background-color: $even-color;
+    }
+
+    .line {
+      width: 120px;
+      height: 12px;
+      border-radius: 6px;
+      @include line($grey);
+
+      &:first-child {
+        @include line($blue)
+      }
+    }
+  }
+
+  &__no-results {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 328px;
+      height: 280px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px 0 rgba(55, 67, 82, 0.05);
+      border: 1px solid rgba(55, 67, 82, 0.1);
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}

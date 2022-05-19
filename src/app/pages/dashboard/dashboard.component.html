@@ -1,0 +1,120 @@
+<section id="dashboard">
+  <div class="container-fluid">
+    <div class="card mt-4">
+      <div class="card-body">
+        <div class="col-12 mt-3">
+
+          <form [formGroup]="form">
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>From Date</label>
+                <input type="text" class="form-control" bsDatepicker [bsValue]="bsRangeValue" placeholder="DD/MM/YYYY"
+                  formControlName="fromdate" (bsValueChange)="onDateChange($event)"
+                  [bsConfig]="{ rangeInputFormat : 'DD/MM/YYYY', dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false,adaptivePosition: true}">
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label>To Date</label>
+                <input type="text" class="form-control" bsDatepicker [bsValue]="bsRangeValue" placeholder="DD/MM/YYYY"
+                  formControlName="todate" (bsValueChange)="onDateChange_to($event)"
+                  [bsConfig]="{ rangeInputFormat : 'DD/MM/YYYY', dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false,adaptivePosition: true}">
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label class="required">Farm Id</label>
+                <ng-multiselect-dropdown  formControlName="farmid" [settings]="CF.SDDL_A"
+                [placeholder]="'Select'" [data]="Farmer_IDS" (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onItemDeSelect($event)">
+              </ng-multiselect-dropdown>
+              <div *ngIf="Submitted && form.get('farmid').hasError('required')"
+              class="invalid" > Farm Id is required
+            </div>
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label>Device Id</label>
+                <ng-multiselect-dropdown  formControlName="deviceid" [settings]="CF.SDDL_A"
+                [placeholder]="'Select'" [data]="Device_IDS" (onSelect)="onItemSelect_device($event)"
+                (onDeSelect)="onItemDeSelect_device($event)">
+              </ng-multiselect-dropdown>
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label class="required">Reading Type</label>
+                <ng-multiselect-dropdown  formControlName="readingtype" [settings]="CF.SDDL_A"
+                [placeholder]="'Select'" [data]="Reading_Types" (onSelect)="onItemSelect_reading($event)"
+                (onDeSelect)="onItemDeSelect_reading($event)">
+              </ng-multiselect-dropdown>
+              <div *ngIf="Submitted && form.get('readingtype').hasError('required')"
+             class="invalid" >Reading type is required
+            </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+              <div class="form-group text-center mt-4">
+                <button type="submit" class="btn btn-primary" [ngClass]="{'button--loading':Btnsuccess }"
+                  (click)="Submit()"><span>Submit</span></button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="tabledata">
+  <div class="container-fluid">
+    <ng-container *ngIf="!Main_data.length && NoOrders">
+      <h3 class="mt-3"><b>GETTING Data</b></h3>
+      <p>Please wait..</p>
+      <div class="animated-background mb-3" *ngFor="let x of [].constructor(8)"></div>
+  </ng-container>
+
+  <h3 *ngIf="!Main_data.length && NoData && !NoOrders">NO Data Found.....!</h3>
+  <div class="card mb-5" *ngIf="Main_data.length && !NoOrders">
+    <div class="card-body">
+
+      <!-- <div > -->
+        <div class="responsiveTable">
+          <table datatable [dtOptions]="CF.dtOptions">
+            <thead>
+              <tr>
+                <th>Sno</th>
+                  <th  *ngFor="let heading of header" class="border-top-0">{{heading}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let team of Main_data, let i=index">
+                <td>{{i+1}}</td>
+                <ng-container *ngFor="let heading of header">
+                  <td *ngIf=" heading!=='transdate'">{{team[heading]}}</td>
+                  <td *ngIf="heading==='transdate'" style="width: 200.762px;">{{team.transdate | date:'dd/MM/yyyy'}}
+                     &nbsp;&nbsp; {{team.transdate | date:'h : mm : ss a'}}</td>
+                  <!-- <td *ngIf="heading==='jsondata'">
+                     <table>
+                      <tr>
+                        <th *ngFor="let josn_head of Object.keys(json.parse(team[heading]))"></th>
+
+                      </tr>
+                    </table>
+                  </td> -->
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>
+
+
+  </div>
+</section>

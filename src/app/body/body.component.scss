@@ -1,0 +1,51 @@
+@import "../../assets/scss/variables";
+.body:fullscreen {
+    background-color: #fff ;
+    ::ng-deep {  
+        .fullscreen{
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            z-index: -999;
+        }      
+        .hidefullscreen {
+            display: block;
+        }
+    }
+}
+.body:not(:fullscreen) {
+    background-color: #fff ;
+    ::ng-deep {
+        .fullscreen{
+            display: block;
+        }
+        .hidefullscreen {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            z-index: -999;
+        }
+    }
+}
+.main {     
+    min-height: calc(100vh - 102.5px);
+    &.mt-60 {
+        margin-top: 60px;
+    }
+
+    @include tablet {
+        .my__overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1029;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            opacity: 0.3;
+        }
+    }
+    @include mobile {
+        margin-bottom: 70px;
+    }
+}

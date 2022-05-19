@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white" id="header" [ngClass]="{fixed: CF.fixedHeader}">
+    <div class="text-center">
+        <a class="navbar-brand" [routerLink]="['/dashboard']">
+            <img src="assets/images/png/logo.png" alt="logo" />
+        </a>
+        <!-- <div class="storInfo mr-auto pl-2 mt-1" *ngIf="(CF.user) as user">
+            <h6 class="mb-0 text-capitalize"><b>Mr. {{user.Name | lowercase}}</b></h6>
+            <h6 class="mb-0" ><small class="text-muted"><span *ngIf="user.FarmName">{{user.FarmName | uppercase}} | </span> <b class="text-primary">{{ clock | date:'hh:mm:ss a'}}</b></small> </h6>
+        </div>
+        <div id="menuToggle" [ngClass]="{active: CF.showMenu}" (click)="toggleMenu()">
+            <span *ngFor="let x of [].constructor(3)"></span>
+        </div>
+        <div id="menu" [ngClass]="{active: CF.showMenu}">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    *ngFor="let link of links">
+                    <a class="nav-link" [routerLink]="[link.url]">{{link.name}}
+                    </a>
+                </li>
+                <li class="logout_btn shadow" (click)="logout()" *ngIf="CF.isLoggedin">Logout</li>
+
+            </ul>
+        </div> -->
+    </div>
+    <div class="nointernetbar" *ngIf="!CF.isConnected"><span>No Internet Connection</span></div>
+</nav>

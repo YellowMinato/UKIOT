@@ -1,0 +1,146 @@
+<section id="auth">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <div class="logo" *ngIf="!ValidGst"></div>
+                            <h3 class="font-weight-bold mb-0">Business</h3>
+                            <p class="text-muted mb-0"><small>Enter your info for registration</small></p>
+                            <h6 class="mt-2" *ngIf="ValidGst"><small><b>GST No: {{GSTNumber}}</b></small></h6>
+                        </div>
+
+                        <form [formGroup]="GSTForm" class="form mt-4" (ngSubmit)="OnGstSubmit()" autocomplete="off"
+                            *ngIf="!ValidGst">
+                            <div class="form-group">
+                                <label class="form-control-label">GST Number</label>
+                                <input type="text" class="form-control" formControlName="gst" autocomplete="nope"
+                                    [ngStyle]="{'border-color':(GSTsubmitted && GSTForm.get('gst').hasError('required')) ? 'red' : '#7e3f97' }"
+                                    [ngClass]="{'is-invalid':GSTsubmitted && GSTForm.get('gst').hasError('required')}"
+                                    (keyup)="GSTForm.patchValue({gst: $event.target.value.toUpperCase()})"
+                                    (keypress)="CF.NoSpace($event)" maxlength="15">
+                                <div *ngIf="GSTsubmitted" class="invalid-feedback d-block">
+                                    <div *ngIf="GSTForm.get('gst').hasError('required')">GST Number is required
+                                    </div>
+                                    <div *ngIf="GSTForm.get('gst').hasError('minlength')">Minimum 15 characters
+                                        required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-center mt-4 mb-0">
+                                <button type="submit" class="btn btn-primary w-100"
+                                    [ngClass]="{'button--loading':GSTsuccess }"><span>REGISTER</span></button>
+                                <a [routerLink]="['/']" class="d-block mt-3 h6">LOGIN</a>
+                            </div>
+                        </form>
+
+
+                        <form [formGroup]="RegisterForm" class="form mt-4" (ngSubmit)="OnSubmit()" autocomplete="off"
+                            *ngIf="ValidGst">
+                            <div class="form-group">
+                                <label class="form-control-label">Name</label>
+                                <input type="text" class="form-control" formControlName="name" autocomplete="nope"
+                                    readonly (keypress)="CF.AlphabetsOnly($event)"
+                                    [ngStyle]="{'border-color':(Registersubmitted && RegisterForm.get('name').hasError('required')) ? 'red' : '#7e3f97' }"
+                                    [ngClass]="{'is-invalid':Registersubmitted && RegisterForm.get('name').hasError('required')}">
+                                <div class="invalid-feedback">Name is required.</div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label class="form-control-label">GST Number</label>
+                                <input type="text" class="form-control" formControlName="gst" autocomplete="nope"
+                                    [ngStyle]="{'border-color':(Registersubmitted && RegisterForm.get('gst').hasError('required')) ? 'red' : '#7e3f97' }"
+                                    [ngClass]="{'is-invalid':Registersubmitted && RegisterForm.get('gst').hasError('required')}"
+                                    (keyup)="RegisterForm.patchValue({gst: $event.target.value.toUpperCase()})"
+                                    (keypress)="CF.NoSpace($event)" maxlength="15">
+                                <div *ngIf="Registersubmitted" class="invalid-feedback d-block">
+                                    <div *ngIf="RegisterForm.get('gst').hasError('required')">GST Number is required
+                                    </div>
+                                    <div *ngIf="RegisterForm.get('gst').hasError('minlength')">Minimum 15 characters
+                                        required.
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="form-group">
+                                <label class="form-control-label">Email</label>
+                                <input type="email" class="form-control" formControlName="email" autocomplete="nope"
+                                    [ngStyle]="{'border-color':(Registersubmitted && RegisterForm.get('email').hasError('required')) ? 'red' : '#7e3f97' }"
+                                    [ngClass]="{'is-invalid':Registersubmitted && RegisterForm.get('email').hasError('required')}">
+                                <div *ngIf="Registersubmitted" class="invalid-feedback d-block">
+                                    <div *ngIf="RegisterForm.get('email').hasError('required')">Email is required.
+                                    </div>
+                                    <div *ngIf="RegisterForm.get('email').hasError('pattern')">Invalid Email
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Mobile</label>
+                                <input type="tel" class="form-control" formControlName="mobile" autocomplete="nope"
+                                    (keypress)="CF.numberOnly($event)"
+                                    [ngStyle]="{'border-color':(Registersubmitted && RegisterForm.get('mobile').hasError('required')) ? 'red' : '#7e3f97' }"
+                                    [ngClass]="{'is-invalid':Registersubmitted && RegisterForm.get('mobile').hasError('required')}">
+                                <div *ngIf="Registersubmitted" class="invalid-feedback d-block">
+                                    <div *ngIf="RegisterForm.get('mobile').hasError('required')">Mobile number is
+                                        required.
+                                    </div>
+                                    <div *ngIf="RegisterForm.get('mobile').hasError('minlength')">Minimum 10 characters
+                                        required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Password</label>
+                                <div class="position-relative">
+                                    <input [type]="hide ? 'password' : 'text'" class="form-control"
+                                        formControlName="password" autocomplete="new-password"
+                                        (keypress)="CF.NoSpace($event)"
+                                        [ngStyle]="{'border-color':(Registersubmitted && RegisterForm.get('password').hasError('required')) ? 'red' : '#7e3f97' }"
+                                        [ngClass]="{'is-invalid':Registersubmitted && RegisterForm.get('password').hasError('required')}">
+                                    <div class="showpsw" (click)="hide = !hide" [ngClass]="(hide)?'hide':'show'"></div>
+                                </div>
+                                <div *ngIf="Registersubmitted" class="invalid-feedback d-block">
+                                    <div *ngIf="RegisterForm.get('password').hasError('required')">Password is required
+                                    </div>
+                                    <div *ngIf="RegisterForm.get('password').hasError('minlength')"> Password must be at
+                                        least 6 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Confirm Password</label>
+                                <div class="position-relative">
+                                    <input [type]="chide ? 'password' : 'text'" class="form-control"
+                                        formControlName="cpassword" autocomplete="new-password1"
+                                        (keypress)="CF.NoSpace($event)"
+                                        [ngStyle]="{'border-color':(Registersubmitted && RegisterForm.get('cpassword').hasError('required')) ? 'red' : '#7e3f97' }"
+                                        [ngClass]="{'is-invalid':Registersubmitted && RegisterForm.get('cpassword').hasError('required')}">
+                                    <div class="showpsw" (click)="chide = !chide" [ngClass]="(chide)?'hide':'show'">
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback d-block"
+                                    *ngIf="Registersubmitted && RegisterForm.hasError('notSame')">
+                                    Password is not same
+                                </div>
+                            </div>
+                            <div class="form-group text-center mt-4 mb-0">
+                                <button type="submit" class="btn btn-primary w-100"
+                                    [ngClass]="{'button--loading':Registersuccess }"><span>REGISTER</span></button>
+                                <a [routerLink]="['/']" class="d-block mt-3 h6">LOGIN</a>
+                            </div>
+                        </form>
+                        <div class="text-center">
+                            <h6 class="mb-0" style="font-size: 12px;line-height: 18px;">By Continuing you agree to the
+                                <br>
+                                <span class="theme-color cursor">
+                                    <a [routerLink]="['/terms']" target="_blank">Terms of Condition</a> </span> &
+                                <span class="theme-color cursor">
+                                    <a [routerLink]="['/privacy']" target="_blank">Privacy Policy</a>
+                                </span>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

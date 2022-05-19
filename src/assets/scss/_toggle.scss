@@ -1,0 +1,117 @@
+// TOGGLE
+ 
+  /* =====================================================
+   Toggle - knob button style
+   ===================================================== */
+   $toggleHeight: 25px;
+   $toggleWidth: 85px;
+   $toggleBtnRadius: 18px;
+   $toggleBtnColor: $theme-color;
+   $toggle-bgColor--inactive: #fff;
+   $toggle-bgColor--active: #fff;
+   $toggle-textColor: #fff;
+   $smartphone:480px;
+   .toggle {
+     display: block;
+     text-align: center;
+     user-select: none;
+     &--checkbox {
+       display: none;
+     }
+     &--btn {
+       display: block;
+       margin: 0 auto;
+       font-size: 12px;
+       transition: all 350ms ease-in;
+       &:hover {
+         cursor: pointer;
+       }
+     }
+     &--btn,
+     &--checkbox,
+     &--feature {
+       &,
+       &:before,
+       &:after {
+         transition: all 250ms ease-in;
+       }
+       &:before,
+       &:after {
+         content: "";
+         display: block;
+       }
+     }
+     &--knob {
+       & .toggle--btn {
+         position: relative;
+         width: $toggleWidth;
+         height: $toggleHeight;
+         text-transform: uppercase;
+         font-size: 12px;
+         font-weight: bold;
+         color: $theme-color;
+         background: $toggle-bgColor--active;
+         border-radius: 40px;
+         border: 1px solid $theme-color;
+         //contains the actual knob part of the button and the 'on' text
+         &:before {
+           display: block;
+           position: absolute;
+           top: 50%;
+           left: 75%;
+           transform: translateY(-50%);
+           width: $toggleBtnRadius;
+           height: $toggleBtnRadius;
+           border-radius: 50%;
+           background: $toggleBtnColor;
+           text-indent: -100%;
+           @media (max-width: $smartphone) {
+             width: 20px;
+             height: 20px;
+           }
+         }
+       }
+       & .toggle--feature {
+         position: relative;
+         display: block;
+         overflow: hidden;
+         height: $toggleHeight;
+         &:before,
+         &:after {
+           position: absolute;
+           top: 50%;
+           transform: translateY(-50%);
+         }
+         &:before {
+           content: attr(data-label-on);
+           left: 15%;
+         }
+         &:after {
+           content: attr(data-label-off);
+           right: -60%;
+         }
+       }
+       & .toggle--checkbox {
+         &:checked {
+           & + .toggle--btn {
+             background: $toggle-bgColor--inactive;
+             // box-shadow: inset 0 20px 40px -10px #7e7e7e;
+             &:before {
+              left: 5%;
+               @media (max-width: $smartphone) {
+                 left: 5px;
+               }
+             }
+             & .toggle--feature {
+               &:before {
+                 left: -60%;
+               }
+               &:after {
+                 right: 15%;
+               }
+             }
+           }
+         }
+       }
+     }
+   }

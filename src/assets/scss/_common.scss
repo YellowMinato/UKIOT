@@ -1,0 +1,39 @@
+@import "./variables";
+$border-radius: 1px;
+label {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #404040;
+  margin-bottom: 3px;
+}
+.form-control {
+  height: 40px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  padding-left: 5px;
+  outline: none;
+  box-shadow: none !important;
+}
+.btn {
+  height: 45px;
+  border-radius: $border-radius;
+  filter: drop-shadow(0px 3px 6px rgb(0 0 0 / 20%));
+  outline: none !important;
+  box-shadow: none !important;
+}
+textarea {
+  min-height: 100px;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding-left: 0;
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+.btn-primary {
+background-image: linear-gradient(45deg, $theme-color, $theme-color-light);
+}
